@@ -107,7 +107,7 @@ describe('server', () => {
             .expect(422)
         })
 
-        it('should return the correct response status of 422 if not all required fields are submitted', async () => {
+        it('should return the correct response status of 405 if game name is not unique', async () => {
             const newGame = {
                 name: 'Rocket League', genre: 'Sports'
             }
