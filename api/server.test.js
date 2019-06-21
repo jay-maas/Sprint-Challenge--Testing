@@ -126,6 +126,24 @@ describe('server', () => {
         })
     })
 
+    describe('GET /:id', () => {
+        
+        it('responds with status of 200', async () => {
+            const newGame = {
+                name: 'Rocket League', genre: 'Sports', releaseYear: 2015
+            }
+            await supertest(server)
+            .post('/')
+            .send(newGame)
+            .set('Accept', 'application/json')
+            .expect(201)
+
+            await supertest(server)
+            .get('/1')
+            .expect(200)
+        })
+    })
+
     describe('PUT /:id', () => {
         it('should return the correct status', async () => {
             const newGame = {

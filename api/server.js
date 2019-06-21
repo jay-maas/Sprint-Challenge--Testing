@@ -16,7 +16,6 @@ server.get('/',  async (req, res) => {
 })
 
 server.get('/games',  async (req, res) => {
-    console.log(req.body)
     try {
         //for testing purposes only 
         if(req.body.test && req.body.test === 'throwErr') {
@@ -24,6 +23,17 @@ server.get('/games',  async (req, res) => {
         }
         const games = await gamesModel.getAll()
         res.status(200).json(games)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json(error)
+    }
+})
+
+server.get('/:id', validateGame, async (req, res) => {
+    console.log('find me', req.validGame.id)
+    try {
+        const game = await gamesModel.findById(req.validGame.id)
+        res.status(200).json(game)
     } catch (error) {
         console.log(error)
         res.status(500).json(error)
